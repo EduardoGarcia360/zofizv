@@ -44,7 +44,7 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td><asp:Button ID="btnIniciar" runat="server" Text="Entrar" /></td>
+                    <td><asp:Button ID="btnIniciar" runat="server" Text="Entrar" BorderStyle="Outset" /></td>
                 </tr>
                 <tr>
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="nuevo2.png" /></td>
