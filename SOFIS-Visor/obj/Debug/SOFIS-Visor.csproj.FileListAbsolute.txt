@@ -1,0 +1,6 @@
+C:\E\Progra\VisualStudioProjects\SOFIS\SOFIS-Visor\bin\SOFIS-Visor.dll.config
+C:\E\Progra\VisualStudioProjects\SOFIS\SOFIS-Visor\bin\SOFIS-Visor.dll
+C:\E\Progra\VisualStudioProjects\SOFIS\SOFIS-Visor\bin\SOFIS-Visor.pdb
+C:\E\Progra\VisualStudioProjects\SOFIS\SOFIS-Visor\obj\Debug\SOFIS-Visor.csprojResolveAssemblyReference.cache
+C:\E\Progra\VisualStudioProjects\SOFIS\SOFIS-Visor\obj\Debug\SOFIS-Visor.dll
+C:\E\Progra\VisualStudioProjects\SOFIS\SOFIS-Visor\obj\Debug\SOFIS-Visor.pdb
