@@ -10,7 +10,7 @@
 namespace SOFIS_Visor {
     
     
-    public partial class Login {
+    public partial class Buscar {
         
         /// <summary>
         /// form1 control.
@@ -22,48 +22,57 @@ namespace SOFIS_Visor {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// txtUserName control.
+        /// txtBusqueda_Codigo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtUserName;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtBusqueda_Codigo;
         
         /// <summary>
-        /// selecpuesto control.
+        /// txtBusqueda_Nombre control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect selecpuesto;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtBusqueda_Nombre;
         
         /// <summary>
-        /// txtPassword control.
+        /// txtBusqueda_Apellido control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputPassword txtPassword;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtBusqueda_Apellido;
         
         /// <summary>
-        /// lblError_Login control.
+        /// btnBuscar_Buscar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblError_Login;
+        protected global::System.Web.UI.WebControls.ImageButton btnBuscar_Buscar;
         
         /// <summary>
-        /// btnentrar control.
+        /// btnBuscar_Todos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnentrar;
+        protected global::System.Web.UI.WebControls.ImageButton btnBuscar_Todos;
+        
+        /// <summary>
+        /// GridView1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridView1;
     }
 }

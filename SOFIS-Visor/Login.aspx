@@ -10,7 +10,7 @@
     .centrar {
    height: 200px;
    width: 500px;
-   margin-top: -50px;
+   margin-top: -100px;
    margin-left: -150px;
    left: 50%;
    top: 50%;
@@ -30,25 +30,33 @@
                 </tr>
                 <tr>
                     <td class="auto-style1"><img src="user2.png" /></td>
-                    <td><input id="txtUserName" type="text" placeholder="usuario23" required="required" /><asp:Label ID="lblError_Usuario" runat="server" ForeColor="Red"></asp:Label></td>
+                    <td><input id="txtUserName" type="text" placeholder="ej. usuario23" required="required" runat="server"/></td>
+                </tr>
+                <tr>
+                    <td colspan="2">Elija su Puesto</td>
+                </tr>
+                <tr>
+                    <td class="auto-style1"><img src="puesto2.png" /></td>
+                    <td>
+                        <select id="selecpuesto" runat="server">
+                            <option value="admin">Administrador</option>
+                            <option value="opera">Operador</option>
+                        </select>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="2">Ingrese su Contraseña</td>
                 </tr>
                 <tr>
                     <td class="auto-style1"><img src="key2.png" /></td>
-                    <td><input id="txtPassword" type="password" required="required" /><asp:Label ID="lblError_Contra" runat="server" ForeColor="Red"></asp:Label></td>
+                    <td><input id="txtPassword" type="password" required="required" runat="server" /></td>
                 </tr>
                 <tr>
                     <td colspan="2"><asp:Label ID="lblError_Login" runat="server" ForeColor="Red"></asp:Label></td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><asp:Button ID="btnIniciar" runat="server" Text="Entrar" BorderStyle="Outset" /></td>
-                </tr>
-                <tr>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="nuevo2.png" /></td>
-                    <td>¿No es un usuario?&nbsp;<a href="Registrar.aspx">Registrese!</a></td>
+                    <td><asp:Button ID="btnentrar" runat="server" Text="Entrar" OnClick="btnentrar_Click" /></td>
                 </tr>
             </table>
 

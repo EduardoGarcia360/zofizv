@@ -26,70 +26,84 @@
     <div class="centrar">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
-                <td colspan="2">Ingrese su Nombre</td>
+                <td colspan="2">Ingrese su Nombre (*)</td>
             </tr>
             <tr>
                 <td class="auto-style2"><img src="user.png" /></td>
-                <td><asp:TextBox ID="TextBox1" runat="server"></asp:TextBox></td>
+                <td><asp:TextBox ID="txtnombre" runat="server" Width="178px"></asp:TextBox></td>
             </tr>
             <tr>
-                <td colspan="2">Ingrese su Apellido</td>
+                <td colspan="2">Ingrese su Apellido (*)</td>
             </tr>
             <tr>
                 <td class="auto-style2"><img src="user.png" /></td>
-                <td><asp:TextBox ID="TextBox2" runat="server"></asp:TextBox></td>
+                <td><asp:TextBox ID="txtapellido" runat="server" Width="178px"></asp:TextBox></td>
             </tr>
             <tr>
-                <td colspan="2">Ingrese su Correo</td>
+                <td colspan="2">Ingrese su Correo (*)</td>
             </tr>
             <tr>
                 <td class="auto-style2"><img src="email.png" /></td>
-                <td><asp:TextBox ID="TextBox3" runat="server"></asp:TextBox></td>
+                <td><asp:TextBox ID="txtcorreo" runat="server" Width="219px"></asp:TextBox>
+                    <asp:Label ID="lblcorreo" runat="server" Text=""></asp:Label>
+                </td>
             </tr>
             <tr>
-                <td colspan="2">Seleccione su Genero</td>
+                <td colspan="2">Seleccione su Genero (*)</td>
             </tr>
             <tr>
                 <td class="auto-style2"><img src="genero.png" /></td>
                 <td>
-                    <select id="Select1">
-                        <option>Hombre</option>
-                        <option>Mujer</option>
+                    <select id="selegenero" runat="server">
+                        <option value="h">Hombre</option>
+                        <option value="m">Mujer</option>
                     </select>
                 </td>
             </tr>
             <tr>
-                <td colspan="2">Tipo de Usuario al que pertenece</td>
+                <td colspan="2">Tipo de Usuario al que pertenece (*)</td>
             </tr>
             <tr>
-                <td class="auto-style2"><img src="puesto.png" /></td>
+                <td class="auto-style2"><img src="puesto3.png" /></td>
                 <td>
-                    <select id="Select2">
-                        <option>Administrador</option>
-                        <option>Operador</option>
+                    <select id="selepuesto" runat="server">
+                        <option value="a">Administrador</option>
+                        <option value="o">Operador</option>
                     </select>
                 </td>
             </tr>
             <tr>
-                <td colspan="2">Ingrese un nombre de usuario</td>
+                <td colspan="2">Ingrese un nombre de usuario (*)</td>
             </tr>
             <tr>
                 <td class="auto-style2"><img src="apodo.png" /></td>
-                <td><input id="Text1" type="text" placeholder="ej: EGarcia" /></td>
+                <td><asp:TextBox ID="txtapodo" runat="server"></asp:TextBox></td>
             </tr>
             <tr>
-                <td colspan="2">Ingrese una contraseña</td>
-            </tr>
-            <tr>
-                <td class="auto-style2"><img src="key.png" /></td>
-                <td><input id="Password1" type="password" /></td>
-            </tr>
-            <tr>
-                <td colspan="2">Confirme la contraseña</td>
+                <td colspan="2">Ingrese una contraseña (*)</td>
             </tr>
             <tr>
                 <td class="auto-style2"><img src="key.png" /></td>
-                <td><input id="Password2" type="password" /></td>
+                <td><asp:TextBox ID="txtcontra1" runat="server" TextMode="Password"></asp:TextBox><asp:Label ID="lblcontra1" runat="server" Text=""></asp:Label></td>
+            </tr>
+            <tr>
+                <td colspan="2">Confirme la contraseña (*)</td>
+            </tr>
+            <tr>
+                <td class="auto-style2"><img src="key.png" /></td>
+                <td><asp:TextBox ID="txtcontra2" runat="server" TextMode="Password"></asp:TextBox><asp:Label ID="lblcontra2" runat="server" Text=""></asp:Label></td>
+            </tr>
+            <tr>
+                <td colspan="2"><asp:Label ID="Label1" runat="server" Text="(*) Campo Obligatorio" ForeColor="Red"></asp:Label></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <asp:Button ID="btnGuardar" runat="server" Text="Registrar" OnClick="btnGuardar_Click" />
+                </td>
+            </tr>
+            <tr>
+                <td><asp:ImageButton runat="server" ID="btnRegresar" ImageUrl="~/regresar.png" ToolTip="Regresar" OnClick="btnRegresar_Click" /></td>
             </tr>
         </table>
     </div>
