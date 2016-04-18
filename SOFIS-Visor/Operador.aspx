@@ -33,12 +33,12 @@
                     <td colspan="2"><h2>Menu de Opciones</h2></td>
                 </tr>
                 <tr>
-                    <td class="auto-style1"><img src="nuevo.png"</td>
-                    <td><a href="Registrar.aspx"><h2>Nuevo Usuario</h2></a></td>
+                    <td class="auto-style1"><img src="editar.png"</td>
+                    <td><a href="Editar.aspx"><h2>Editar mis datos</h2></a></td>
                 </tr>
                 <tr>
-                    <td class="auto-style1"><img src="buscar2.png" /></td>
-                    <td><a href="Buscar.aspx"><h2>Buscar Usuario</h2></a></td>
+                    <td class="auto-style1"><img src="archivos.png" /></td>
+                    <td><a href=""><h2>Consultar Archivos</h2></a></td>
                 </tr>
                 <tr>
                     

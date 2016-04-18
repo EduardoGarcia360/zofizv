@@ -18,7 +18,7 @@ namespace SOFIS_Visor
 
         protected void btnentrar_Click(object sender, EventArgs e)
         {
-            string usuario, password, p, puesto;
+            string usuario, password, puesto;
             Conexion cone = new Conexion();
             usuario = txtUserName.Value.ToString();
             password = txtPassword.Value.ToString();
@@ -39,15 +39,10 @@ namespace SOFIS_Visor
             }
             else
             {
-                lblError_Login.Text = usuario + "-" + password + "-" + puesto;
-                //lblError_Login.Text = "Usuario y/o contraseña incorrectos";
+                lblError_Login.Text = "Usuario y/o contraseña y/o puesto incorrectos";
             }
         }
 
-        protected void algo_Click(object sender, EventArgs e)
-        {
-
-        }
 
     }
 }

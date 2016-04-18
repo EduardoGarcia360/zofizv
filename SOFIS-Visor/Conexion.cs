@@ -14,53 +14,39 @@ namespace SOFIS_Visor
 
         public Conexion()
         {
-            cadena_conexion = "Data Source=Edu-PC;Initial Catalog=SOFISBD;Integrated Security=True";
+           
         }
 
-        private SqlConnection get_conexion()
-        {
-            try
-            {
-                SqlConnection conn = new SqlConnection(cadena_conexion);
-                conn.Open();
-                return conn;
-            }
-            catch (Exception exc)
-            {
-                return null;
-            }
-        } //fin private
+        
 
         public bool Nuevo_Usuario(string nombre, string apellido, string correo, string genero, string puesto, string usuario, string contra)
         {
-            SqlConnection conn;
-            try
-            {
-                using (conn = get_conexion())
-                {
-                    using (SqlCommand command = new SqlCommand())
-                    {
-                        command.Connection = conn;
-                        command.CommandType = System.Data.CommandType.Text;
-                        command.CommandText = "INSERT INTO empleado (nombre, apellido, correo, genero, puesto, usuario, contra, activo)"
+            string sql = @"INSERT INTO empleado (nombre, apellido, correo, genero, puesto, usuario, contra, activo)"
                                 + "VALUES (@nombre, @apellido, @correo, @genero, @puesto, @usuario, @contra, @activo)";
-
-                        command.Parameters.Add("@nombre", System.Data.SqlDbType.VarChar).Value = nombre;
-                        command.Parameters.Add("@apellido", System.Data.SqlDbType.VarChar).Value = apellido;
-                        command.Parameters.Add("@correo", System.Data.SqlDbType.VarChar).Value = correo;
-                        command.Parameters.Add("@genero", System.Data.SqlDbType.VarChar).Value = genero;
-                        command.Parameters.Add("@puesto", System.Data.SqlDbType.VarChar).Value = puesto;
-                        command.Parameters.Add("@usuario", System.Data.SqlDbType.VarChar).Value = usuario;
-                        command.Parameters.Add("@contra", System.Data.SqlDbType.VarChar).Value = contra;
-                        command.Parameters.Add("@activo", System.Data.SqlDbType.Bit).Value = 1;
-                            return (command.ExecuteNonQuery() == 1);
-                    }
-                }
-            }
-            catch (Exception exc)
+            //cadena conexion
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["cadenaConexion"].ToString()))
             {
-                return false;
+                conn.Open();//abrimos conexion
+
+                SqlCommand cmd = new SqlCommand(sql, conn); //ejecutamos la instruccion
+                cmd.Parameters.AddWithValue("@nombre", nombre);
+                cmd.Parameters.AddWithValue("@apellido", apellido); //enviamos los parametros
+                cmd.Parameters.AddWithValue("@correo", correo);
+                cmd.Parameters.AddWithValue("@genero", genero);
+                cmd.Parameters.AddWithValue("@puesto", puesto);
+                cmd.Parameters.AddWithValue("@usuario", usuario);
+                cmd.Parameters.AddWithValue("@contra", contra);
+                cmd.Parameters.AddWithValue("@activo", 1);
+
+                int count = Convert.ToInt32(cmd.ExecuteScalar()); //devuelve la fila afectada
+
+                if (count == 0)
+                    return false;
+                else
+                    return true;
+
             }
+            //----------------------------------------------------------------------------------------------
         }//fin nuevo usuario
 
         public bool validar_login(string usuario, string pass, string puesto)
@@ -72,6 +58,7 @@ namespace SOFIS_Visor
                 conn.Open();//abrimos conexion
 
                 SqlCommand cmd = new SqlCommand(sql, conn); //ejecutamos la instruccion
+
                 cmd.Parameters.AddWithValue("@pue", puesto);
                 cmd.Parameters.AddWithValue("@usu", usuario); //enviamos los parametros
                 cmd.Parameters.AddWithValue("@con", pass);
@@ -82,10 +69,65 @@ namespace SOFIS_Visor
                     return false;
                 else
                     return true;
-
             }
-
-            
         }//fin validar login
+
+        public bool actualizar_dato(string campo, string dato, int codempleado)
+        {
+            string sql = @"UPDATE empleado SET "+campo+ "=@dato WHERE cod_empleado=@codigo";
+            //cadena conexion
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["cadenaConexion"].ToString()))
+            {
+                conn.Open();//abrimos conexion
+
+                SqlCommand cmd = new SqlCommand(sql, conn); //ejecutamos la instruccion
+
+                cmd.Parameters.AddWithValue("@dato", dato);
+                cmd.Parameters.AddWithValue("@codigo", codempleado); //enviamos los parametros
+
+                int count = Convert.ToInt32(cmd.ExecuteScalar()); //devuelve la fila afectada
+
+                if (count > 0)
+                    return false;
+                else
+                    return true;
+            }
+        }//fin actualizar dato
+
+        public int consultar_dato(string campo, string usuario)
+        {
+            string sql = @"SELECT cod_empleado FROM empleado WHERE usuario=@usuario";
+            //cadena conexion
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["cadenaConexion"].ToString()))
+            {
+                conn.Open();//abrimos conexion
+
+                SqlCommand cmd = new SqlCommand(sql, conn); //ejecutamos la instruccion
+
+                cmd.Parameters.AddWithValue("@usuario", usuario); //enviamos los parametros
+
+                
+                int retorno = Convert.ToInt32(cmd.ExecuteScalar()); //devuelve la fila afectada
+                return retorno;
+            }
+        }//fin codigo empleado
+
+        public string consultar_dato_texto(string campo, string usuario)
+        {
+            string sql = @"SELECT "+ campo +" FROM empleado WHERE usuario=@usuario";
+            //cadena conexion
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["cadenaConexion"].ToString()))
+            {
+                conn.Open();//abrimos conexion
+
+                SqlCommand cmd = new SqlCommand(sql, conn); //ejecutamos la instruccion
+
+                cmd.Parameters.AddWithValue("@usuario", usuario); //enviamos los parametros
+
+
+                string retorno = Convert.ToString(cmd.ExecuteScalar()); //devuelve la fila afectada
+                return retorno;
+            }
+        }
     }
 }

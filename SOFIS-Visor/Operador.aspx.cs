@@ -11,7 +11,20 @@ namespace SOFIS_Visor
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            string userid = (string)Session["usuario"];
+            if (!IsPostBack)
+            {
+                if (String.IsNullOrEmpty(userid))
+                {
+                    Response.Redirect("Login.aspx");
+                }
+            }
+        }
 
+        protected void btnSalir_Click(object sender, ImageClickEventArgs e)
+        {
+            this.Session.Clear();
+            Response.Redirect("Login.aspx");
         }
     }
 }

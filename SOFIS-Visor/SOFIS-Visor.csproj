@@ -67,6 +67,7 @@
   <ItemGroup>
     <Content Include="Administrador.aspx" />
     <Content Include="Buscar.aspx" />
+    <Content Include="Editar.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Operador.aspx" />
     <Content Include="Registrar.aspx" />
@@ -88,6 +89,13 @@
       <DependentUpon>Buscar.aspx</DependentUpon>
     </Compile>
     <Compile Include="Conexion.cs" />
+    <Compile Include="Editar.aspx.cs">
+      <DependentUpon>Editar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Editar.aspx.designer.cs">
+      <DependentUpon>Editar.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -110,6 +118,7 @@
     <Compile Include="Registrar.aspx.designer.cs">
       <DependentUpon>Registrar.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Validaciones.cs" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Registrar.aspx.cs" Inherits="SOFIS_Visor.Registrar" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Editar.aspx.cs" Inherits="SOFIS_Visor.Editar" %>
 
 <!DOCTYPE html>
 
@@ -10,7 +10,7 @@
     .centrar {
    height: 200px;
    width: 500px;
-   margin-top: -200px;
+   margin-top: -150px;
    margin-left: -150px;
    left: 50%;
    top: 50%;
@@ -21,26 +21,30 @@
         }
     </style>
 </head>
-<body style="background-image: url(fondo1.jpg)">
+<body style="background-image: url(fondo_general.jpg)">
     <form id="form1" runat="server">
     <div class="centrar">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
-                <td colspan="2">Ingrese su Nombre (*)</td>
+                <td colspan="2">Nuevo nombre</td>
             </tr>
             <tr>
                 <td class="auto-style2"><img src="user.png" /></td>
-                <td><asp:TextBox ID="txtnombre" runat="server" Width="178px"></asp:TextBox></td>
+                <td><asp:TextBox ID="txtnombre" runat="server" Width="178px"></asp:TextBox>
+                    <asp:Label ID="lblnombre" runat="server" Text=""></asp:Label>
+                </td>
             </tr>
             <tr>
-                <td colspan="2">Ingrese su Apellido (*)</td>
+                <td colspan="2">Nuevo apellido</td>
             </tr>
             <tr>
                 <td class="auto-style2"><img src="user.png" /></td>
-                <td><asp:TextBox ID="txtapellido" runat="server" Width="178px"></asp:TextBox></td>
+                <td><asp:TextBox ID="txtapellido" runat="server" Width="178px"></asp:TextBox>
+                    <asp:Label ID="lblapellido" runat="server" Text=""></asp:Label>
+                </td>
             </tr>
             <tr>
-                <td colspan="2">Ingrese su Correo (*)</td>
+                <td colspan="2">Nuevo correo</td>
             </tr>
             <tr>
                 <td class="auto-style2"><img src="email.png" /></td>
@@ -49,7 +53,7 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2">Seleccione su Genero (*)</td>
+                <td colspan="2">Cambiar genero</td>
             </tr>
             <tr>
                 <td class="auto-style2"><img src="genero.png" /></td>
@@ -58,29 +62,11 @@
                         <option value="m">Hombre</option>
                         <option value="f">Mujer</option>
                     </select>
+                    <asp:Label ID="lblgenero" runat="server" Text=""></asp:Label>
                 </td>
             </tr>
             <tr>
-                <td colspan="2">Tipo de Usuario al que pertenece (*)</td>
-            </tr>
-            <tr>
-                <td class="auto-style2"><img src="puesto3.png" /></td>
-                <td>
-                    <select id="selepuesto" runat="server">
-                        <option value="admin">Administrador</option>
-                        <option value="opera">Operador</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">Ingrese un nombre de usuario (*)</td>
-            </tr>
-            <tr>
-                <td class="auto-style2"><img src="apodo.png" /></td>
-                <td><asp:TextBox ID="txtapodo" runat="server"></asp:TextBox></td>
-            </tr>
-            <tr>
-                <td colspan="2">Ingrese una contraseña (*)</td>
+                <td colspan="2">Nueva contraseña</td>
             </tr>
             <tr>
                 <td class="auto-style2"><img src="key.png" /></td>
@@ -94,12 +80,12 @@
                 <td><asp:TextBox ID="txtcontra2" runat="server" TextMode="Password"></asp:TextBox><asp:Label ID="lblcontra2" runat="server" Text=""></asp:Label></td>
             </tr>
             <tr>
-                <td colspan="2"><asp:Label ID="Label1" runat="server" Text="(*) Campo Obligatorio" ForeColor="Red"></asp:Label></td>
+                <td colspan="2"><asp:Label ID="lblMensaje" runat="server" Text="Puede cambiar todos o ninguno de los datos." ForeColor="Red"></asp:Label></td>
             </tr>
             <tr>
                 <td></td>
                 <td>
-                    <asp:Button ID="btnGuardar" runat="server" Text="Registrar" OnClick="btnGuardar_Click" />
+                    <asp:Button ID="btnModificar" runat="server" Text="Modificar" OnClick="btnModificar_Click" />
                 </td>
             </tr>
             <tr>

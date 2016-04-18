@@ -11,7 +11,7 @@
         .centrar {
    height: 200px;
    width: 500px;
-   margin-top: -100px;
+   margin-top: -50px;
    margin-left: -150px;
    left: 50%;
    top: 50%;

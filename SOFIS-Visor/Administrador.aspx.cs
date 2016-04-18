@@ -23,6 +23,7 @@ namespace SOFIS_Visor
 
         protected void btnSalir_Click(object sender, ImageClickEventArgs e)
         {
+            this.Session.Clear();
             Response.Redirect("Login.aspx");
         }
     }
