@@ -16,6 +16,14 @@ namespace SOFIS_Visor
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            string userid = (string)Session["usuario"];
+            if (!IsPostBack)
+            {
+                if (String.IsNullOrEmpty(userid))
+                {
+                    Response.Redirect("Login.aspx");
+                }
+            }
             variable = this.Session["usuario"].ToString();
             cod_emp = conectar.consultar_dato("cod_empleado",variable);
             sexo = conectar.consultar_dato_texto("genero", variable);

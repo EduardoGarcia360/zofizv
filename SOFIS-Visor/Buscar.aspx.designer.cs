@@ -31,24 +31,6 @@ namespace SOFIS_Visor {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtBusqueda_Codigo;
         
         /// <summary>
-        /// txtBusqueda_Nombre control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtBusqueda_Nombre;
-        
-        /// <summary>
-        /// txtBusqueda_Apellido control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtBusqueda_Apellido;
-        
-        /// <summary>
         /// btnBuscar_Buscar control.
         /// </summary>
         /// <remarks>
@@ -65,6 +47,15 @@ namespace SOFIS_Visor {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton btnBuscar_Todos;
+        
+        /// <summary>
+        /// lblerror control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblerror;
         
         /// <summary>
         /// GridView1 control.

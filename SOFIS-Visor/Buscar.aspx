@@ -4,14 +4,21 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <link rel="icon" type="image/png" href="ico.ico" />
     <title>SOFIS</title>
     <style type="text/css">
         .auto-style1 {
-            width: 138px;
+            width: 113px;
         }
         .auto-style2 {
             width: 138px;
             height: 30px;
+        }
+        .auto-style3 {
+            width: 67px;
+        }
+        .auto-style4 {
+            width: 30px;
         }
     </style>
 </head>
@@ -26,36 +33,87 @@
                 <td class="auto-style1">
                     <h5>Codigo de Usuario</h5>
                 </td>
-                <td>
+                <td class="auto-style3">
                     <input id="txtBusqueda_Codigo" runat="server" type="text" placeholder="Obligatorio" />
                 </td>
-                <td>
-                    <h5>Nombre</h5>
-                </td>
-                <td>
-                    <input id="txtBusqueda_Nombre" runat="server" type="text" placeholder="Opcional" />
-                </td>
-                <td>
-                    <h5>Apellido</h5>
-                </td>
-                <td>
-                    <input id="txtBusqueda_Apellido" runat="server" type="text" placeholder="Opcional" />
-                </td>
-                <td>
-
-                </td>
-                <td>
-                    <asp:ImageButton runat="server" ID="btnBuscar_Buscar" ImageUrl="~/buscar.png" ToolTip="Buscar" />
+                <td class="auto-style4">
+                    <asp:ImageButton runat="server" ID="btnBuscar_Buscar" ImageUrl="~/buscar.png" ToolTip="Buscar" OnClick="btnBuscar_Buscar_Click" />
                 </td>
                 <td>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</td>
                 <td>
-                    <asp:ImageButton runat="server" ID="btnBuscar_Todos" ImageUrl="~/todos.png" ToolTip="Mostrar Todos" />
+                    <asp:ImageButton runat="server" ID="btnBuscar_Todos" ImageUrl="~/todos.png" ToolTip="Mostrar Todos" OnClick="btnBuscar_Todos_Click" />
                 </td>
             </tr>
+            <tr>
+                <td colspan="8"><asp:Label ID="lblerror" runat="server" Text="" ForeColor="Red"></asp:Label></td>
+            </tr>
         </table>
-        <asp:GridView ID="GridView1" runat="server" EmptyDataText="No hay datos para mostrar" GridLines="Horizontal" AutoGenerateColumns="false"></asp:GridView>
+        <asp:GridView ID="GridView1" runat="server" EmptyDataText="No hay datos para mostrar" GridLines="Both" AutoGenerateColumns="false" >
+            <Columns>
+                <asp:TemplateField HeaderText="Cod. Empleado">
+                    <ItemTemplate>
+                        <asp:Label runat="server" ID="lblCodEmpleado" Text='<%# Eval("cod_empleado") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Nombre">
+                    <ItemTemplate>
+                        <asp:Label runat="server" ID="lblNombre" Text='<%# Eval("nombre") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Apellido">
+                    <ItemTemplate>
+                        <asp:Label runat="server" ID="lblApellido" Text='<%# Eval("apellido") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Correo">
+                    <ItemTemplate>
+                        <asp:Label runat="server" ID="lblCorreo" Text='<%# Eval("correo") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Genero">
+                    <ItemTemplate>
+                        <asp:Label runat="server" ID="lblGenero" Text='<%# Eval("genero") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Puesto">
+                    <ItemTemplate>
+                        <asp:Label runat="server" ID="lblPuesto" Text='<%# Eval("puesto") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Nombre Usuario">
+                    <ItemTemplate>
+                        <asp:Label runat="server" ID="lblUserName" Text='<%# Eval("usuario") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Contraseña">
+                    <ItemTemplate>
+                        <asp:Label runat="server" ID="lblContra" Text='<%# Eval("contra") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Activo">
+                    <ItemTemplate>
+                        <asp:Label runat="server" ID="lblactivo" Text='<%# Eval("activo") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Acciones">
+                    <ItemTemplate>
+                        <asp:ImageButton runat="server" ID="btnDardebaja" ImageUrl="~/dar_de_baja.png" ToolTip="Dar de Baja" />
+                        <asp:ImageButton runat="server" ID="btnBitacora" ImageUrl="~/ver_bitacora.png" ToolTip="Ver Bitacora" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
     </div>
     </form>
 </body>
