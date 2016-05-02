@@ -47,10 +47,10 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="8"><asp:Label ID="lblerror" runat="server" Text="" ForeColor="Red"></asp:Label></td>
+                <td colspan="8"><asp:Label ID="lblmensaje" runat="server" Text="" ForeColor="Red"></asp:Label></td>
             </tr>
         </table>
-        <asp:GridView ID="GridView1" runat="server" EmptyDataText="No hay datos para mostrar" GridLines="Both" AutoGenerateColumns="false" >
+        <asp:GridView ID="GridView1" runat="server" EmptyDataText="No hay datos para mostrar" GridLines="Both" AutoGenerateColumns="false" OnRowCommand="GridView1_RowCommand" >
             <Columns>
                 <asp:TemplateField HeaderText="Cod. Empleado">
                     <ItemTemplate>
@@ -108,8 +108,8 @@
 
                 <asp:TemplateField HeaderText="Acciones">
                     <ItemTemplate>
-                        <asp:ImageButton runat="server" ID="btnDardebaja" ImageUrl="~/dar_de_baja.png" ToolTip="Dar de Baja" />
-                        <asp:ImageButton runat="server" ID="btnBitacora" ImageUrl="~/ver_bitacora.png" ToolTip="Ver Bitacora" />
+                        <asp:ImageButton runat="server" ID="btnDardebaja" ImageUrl="~/dar_de_baja.png" ToolTip="Dar de Baja" CommandName="DarDeBaja" CommandArgument='<%# Eval("cod_empleado") %>' />
+                        <asp:ImageButton runat="server" ID="btnBitacora" ImageUrl="~/ver_bitacora.png" ToolTip="Ver Bitacora" CommandName="Bitacora" />
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>

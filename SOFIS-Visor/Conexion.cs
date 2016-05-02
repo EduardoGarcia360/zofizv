@@ -9,8 +9,8 @@ namespace SOFIS_Visor
 {
     public class Conexion
     {
-        private string cadena_conexion;
-        SqlDataReader dr;
+        //private string cadena_conexion;
+        //SqlDataReader dr;
 
         public Conexion()
         {
@@ -94,6 +94,7 @@ namespace SOFIS_Visor
             }
         }//fin actualizar dato
 
+
         public int consultar_dato(string campo, string usuario)
         {
             string sql = @"SELECT cod_empleado FROM empleado WHERE usuario=@usuario";
@@ -123,6 +124,24 @@ namespace SOFIS_Visor
                 SqlCommand cmd = new SqlCommand(sql, conn); //ejecutamos la instruccion
 
                 cmd.Parameters.AddWithValue("@usuario", usuario); //enviamos los parametros
+
+
+                string retorno = Convert.ToString(cmd.ExecuteScalar()); //devuelve la fila afectada
+                return retorno;
+            }
+        }//fin consultar dato texto
+
+        public string retornar_dato(string campo, int codigousuario)
+        {
+            string sql = @"SELECT " + campo + " FROM empleado WHERE cod_empleado=@codigo";
+            //cadena conexion
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["cadenaConexion"].ToString()))
+            {
+                conn.Open();//abrimos conexion
+
+                SqlCommand cmd = new SqlCommand(sql, conn); //ejecutamos la instruccion
+
+                cmd.Parameters.AddWithValue("@codigo", codigousuario); //enviamos los parametros
 
 
                 string retorno = Convert.ToString(cmd.ExecuteScalar()); //devuelve la fila afectada

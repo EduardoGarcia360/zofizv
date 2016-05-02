@@ -38,7 +38,7 @@
                 </tr>
                 <tr>
                     <td class="auto-style1"><img src="archivos.png" /></td>
-                    <td><a href=""><h2>Consultar Archivos</h2></a></td>
+                    <td><a href="Archivos.aspx"><h2>Consultar Archivos</h2></a></td>
                 </tr>
                 <tr>
                     

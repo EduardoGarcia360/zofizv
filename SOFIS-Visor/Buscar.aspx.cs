@@ -12,6 +12,8 @@ namespace SOFIS_Visor
 {
     public partial class Buscar : System.Web.UI.Page
     {
+
+        Conexion conectar = new Conexion();
         protected void Page_Load(object sender, EventArgs e)
         {
             string userid = (string)Session["usuario"];
@@ -29,7 +31,7 @@ namespace SOFIS_Visor
             string cod = txtBusqueda_Codigo.Value.ToString();
             if (string.IsNullOrEmpty(cod))
             {
-                lblerror.Text = "Ingrese un codigo de cliente";
+                lblmensaje.Text = "Ingrese un codigo de cliente";
             }
             else
             {
@@ -56,6 +58,21 @@ namespace SOFIS_Visor
             GridView1.DataSource = ds;
             GridView1.DataBind();
             conn.Close();
+        }
+
+        protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "DarDeBaja")
+            {
+                string dato_codcliente = e.CommandArgument.ToString();
+                int codcliente = Convert.ToInt32(dato_codcliente);
+                if (conectar.actualizar_dato("activo", "0", codcliente))
+                {
+                    string nombre = conectar.retornar_dato("nombre", codcliente);
+                    lblmensaje.Text = "Empleado "+nombre+" ha sido dado de baja.";
+                }
+                
+            }
         }
 
     }

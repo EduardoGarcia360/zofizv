@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Administrador.aspx" />
+    <Content Include="Archivos.aspx" />
     <Content Include="Buscar.aspx" />
     <Content Include="Editar.aspx" />
     <Content Include="Login.aspx" />
@@ -80,6 +81,13 @@
     </Compile>
     <Compile Include="Administrador.aspx.designer.cs">
       <DependentUpon>Administrador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Archivos.aspx.cs">
+      <DependentUpon>Archivos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Archivos.aspx.designer.cs">
+      <DependentUpon>Archivos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Buscar.aspx.cs">
       <DependentUpon>Buscar.aspx</DependentUpon>

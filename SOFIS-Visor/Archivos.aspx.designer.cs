@@ -10,7 +10,7 @@
 namespace SOFIS_Visor {
     
     
-    public partial class Buscar {
+    public partial class Archivos {
         
         /// <summary>
         /// form1 control.
@@ -22,31 +22,49 @@ namespace SOFIS_Visor {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// txtBusqueda_Codigo control.
+        /// txtArchivo_Fecha control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtBusqueda_Codigo;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtArchivo_Fecha;
         
         /// <summary>
-        /// btnBuscar_Buscar control.
+        /// selecdepa control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnBuscar_Buscar;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect selecdepa;
         
         /// <summary>
-        /// btnBuscar_Todos control.
+        /// selectipo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnBuscar_Todos;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect selectipo;
+        
+        /// <summary>
+        /// btnBuscar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btnBuscar;
+        
+        /// <summary>
+        /// btnMostrar_Todos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btnMostrar_Todos;
         
         /// <summary>
         /// lblmensaje control.
