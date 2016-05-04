@@ -127,6 +127,7 @@
       <DependentUpon>Registrar.aspx</DependentUpon>
     </Compile>
     <Compile Include="Validaciones.cs" />
+    <Compile Include="ValidarXML.cs" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

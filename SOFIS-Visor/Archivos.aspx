@@ -57,7 +57,7 @@
                     <asp:ImageButton runat="server" ID="btnBuscar" ImageUrl="~/buscar.png" ToolTip="Buscar" OnClick="btnBuscar_Click" />
                 </td>
                 <td>
-
+                    <asp:Button runat="server" ID="btnprueba" Text="prueba" OnClick="btnprueba_Click"/>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</td>
                 <td>
                     <asp:ImageButton runat="server" ID="btnMostrar_Todos" ImageUrl="~/todos.png" ToolTip="Mostrar Todos" OnClick="btnMostrar_Todos_Click" />
@@ -122,6 +122,7 @@
                 <asp:TemplateField HeaderText="Acciones">
                     <ItemTemplate>
                         <asp:ImageButton runat="server" ID="btnValidar" ImageUrl="~/validar.png" ToolTip="Validar" CommandName="ValidarArchivo" CommandArgument='<%# Eval("cod_archivo") %>' />
+                        <asp:ImageButton runat="server" ID="btnDescargar" ImageUrl="~/descargar.png" ToolTip="Descargar" CommandName="Descargar" CommandArgument='<%# Eval("cod_archivo") %>' />
                     </ItemTemplate>
                 </asp:TemplateField>
 
