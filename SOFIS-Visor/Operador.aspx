@@ -33,7 +33,7 @@
                     <td colspan="2"><h2>Menu de Opciones</h2></td>
                 </tr>
                 <tr>
-                    <td class="auto-style1"><img src="editar.png"</td>
+                    <td class="auto-style1"><img src="editar.png" /></td>
                     <td><a href="Editar.aspx"><h2>Editar mis datos</h2></a></td>
                 </tr>
                 <tr>
@@ -41,7 +41,10 @@
                     <td><a href="Archivos.aspx"><h2>Consultar Archivos</h2></a></td>
                 </tr>
                 <tr>
-                    
+                    <td class="auto-style1"><img src="copia.png" /></td>
+                    <td></td>
+                </tr>
+                <tr>
                     <td><asp:ImageButton runat="server" ID="btnSalir" ImageUrl="~/salir.png" OnClick="btnSalir_Click" AlternateText="Salir" ToolTip="Salir" /></td>
                 </tr>
                 

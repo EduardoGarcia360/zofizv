@@ -68,6 +68,7 @@
     <Content Include="Administrador.aspx" />
     <Content Include="Archivos.aspx" />
     <Content Include="Buscar.aspx" />
+    <Content Include="Copia.aspx" />
     <Content Include="Editar.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Operador.aspx" />
@@ -97,6 +98,13 @@
       <DependentUpon>Buscar.aspx</DependentUpon>
     </Compile>
     <Compile Include="Conexion.cs" />
+    <Compile Include="Copia.aspx.cs">
+      <DependentUpon>Copia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Copia.aspx.designer.cs">
+      <DependentUpon>Copia.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Editar.aspx.cs">
       <DependentUpon>Editar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

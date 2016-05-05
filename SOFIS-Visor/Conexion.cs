@@ -9,15 +9,10 @@ namespace SOFIS_Visor
 {
     public class Conexion
     {
-        //private string cadena_conexion;
-        //SqlDataReader dr;
-
         public Conexion()
         {
            
         }
-
-        
 
         public bool Nuevo_Usuario(string nombre, string apellido, string correo, string genero, string puesto, string usuario, string contra)
         {
@@ -93,7 +88,6 @@ namespace SOFIS_Visor
                     return true;
             }
         }//fin actualizar dato
-
 
         public int consultar_dato(string campo, string usuario)
         {
