@@ -14,7 +14,14 @@ namespace SOFIS_Visor
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            string userid = (string)Session["usuario"];
+            if (!IsPostBack)
+            {
+                if (String.IsNullOrEmpty(userid))
+                {
+                    Response.Redirect("Login.aspx");
+                }
+            }
         }
 
         protected void btnBuscar_Click(object sender, ImageClickEventArgs e)
@@ -56,24 +63,36 @@ namespace SOFIS_Visor
             {
                 string cod = e.CommandArgument.ToString();
                 
-                string sql = "SELECT cod_copia, nombre, fecha_recepcion, hora_recepcion FROM copia WHERE cod_copia='"+cod+"'";
+                string sql = "SELECT nombre FROM copia WHERE cod_copia=@codigo";
                 
                 using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["cadenaConexion"].ToString()))
                 {
                     conn.Open();//abrimos conexion
-                    SqlDataReader fila = null;
 
                     try
                     {
-                        SqlCommand cmd = new SqlCommand(sql, conn); //ejecutamos la instruccion
-                        fila = cmd.ExecuteReader();
-                        string retorno = "";
-                        while (fila.Read())
+                        
+                            SqlCommand cmd = new SqlCommand(sql, conn); //ejecutamos la instruccion
+
+                            cmd.Parameters.AddWithValue("@codigo", cod); //enviamos los parametros
+
+                            string nombre = Convert.ToString(cmd.ExecuteScalar()); //devuelve la fila afectada
+                         
+
+                        try
                         {
-                            retorno = fila["cod_copia"].ToString() + "-" + fila["nombre"].ToString() + "-" + fila["fecha_recepcion"].ToString()
-                            + "-" + fila["hora_recepcion"].ToString();
+                            string dato_codigoarchivo = e.CommandArgument.ToString();
+                            int codigoarchivo = Convert.ToInt32(dato_codigoarchivo);
+                            Response.ContentType = "Application/xml";
+                            Response.AppendHeader("Content-Disposition", "attachment; filename="+nombre+".bkup");
+                            Response.TransmitFile(Server.MapPath(@"C:\SOFIS\backup/"+nombre+".bkup"));
+                            Response.End();
                         }
-                        lblmensaje.Text = retorno;
+                        catch (Exception)
+                        {
+                            lblmensaje.Text = "Error en la descarga";
+                        }
+                        
                     }
                     catch (Exception)
                     {

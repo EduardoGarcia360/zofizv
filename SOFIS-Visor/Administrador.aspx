@@ -41,6 +41,10 @@
                     <td><a href="Buscar.aspx"><h2>Buscar Usuario</h2></a></td>
                 </tr>
                 <tr>
+                    <td class ="auto-style1"><img src="copia.png" /></td>
+                    <td><a href="Copia.aspx"><h2>Copia de Seguridad</h2></a></td>
+                </tr>
+                <tr>
                     
                     <td><asp:ImageButton runat="server" ID="btnSalir" ImageUrl="~/salir.png" OnClick="btnSalir_Click" AlternateText="Salir" ToolTip="Salir" /></td>
                 </tr>

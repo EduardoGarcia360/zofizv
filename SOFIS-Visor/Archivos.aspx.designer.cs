@@ -58,15 +58,6 @@ namespace SOFIS_Visor {
         protected global::System.Web.UI.WebControls.ImageButton btnBuscar;
         
         /// <summary>
-        /// Control btnprueba.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnprueba;
-        
-        /// <summary>
         /// Control btnMostrar_Todos.
         /// </summary>
         /// <remarks>

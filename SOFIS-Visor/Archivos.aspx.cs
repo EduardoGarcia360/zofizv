@@ -17,7 +17,7 @@ namespace SOFIS_Visor
         ValidarXML vxml = new ValidarXML();
         protected void Page_Load(object sender, EventArgs e)
         {
-            /**
+            
             string userid = (string)Session["usuario"];
             if (!IsPostBack)
             {
@@ -26,7 +26,7 @@ namespace SOFIS_Visor
                     Response.Redirect("Login.aspx");
                 }
             }
-             * */
+            
         }
 
         protected void btnBuscar_Click(object sender, ImageClickEventArgs e)
@@ -102,18 +102,5 @@ namespace SOFIS_Visor
             }
         }
 
-        protected void btnprueba_Click(object sender, EventArgs e)
-        {
-            //C:/SOFIS/intake/BANCA.CARTA.2016.02.23.08.00.01.311.xml
-            string sFilePath = "C:/SOFIS/intake/BANCA.CARTA.2016.02.23.08.00.01.311.xml", sFileName = "BANCA.CARTA.2016.02.23.08.00.01.311.xml";
-            FileInfo file = new FileInfo(sFilePath);
-
-            Response.Clear();
-            Response.AddHeader("Content-Disposition", "attachment; filename=" + sFileName);
-            Response.AddHeader("Content-Length", file.Length.ToString(CultureInfo.InvariantCulture));
-            Response.ContentType = "application/octet-stream";
-            Response.WriteFile(file.FullName);
-            Response.End();
-        }
     }
 }
