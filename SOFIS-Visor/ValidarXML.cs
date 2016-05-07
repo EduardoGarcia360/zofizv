@@ -8,12 +8,24 @@ namespace SOFIS_Visor
 {
     public class ValidarXML
     {
-
         int total_de_hojas = 0;
 
+        public bool validar_contenido(string archivo)
+        {
+            bool valido = false;
+            if (validar_contenido_datos(archivo))
+            {
+                if (validar_pagina(archivo))
+                {
+                    composicion_archivo(archivo);
+                    valido = true;
+                }
+            }
+            return valido;
+        }
 
         //metodo para validar el contenido de el apartado "datos" dentro del XML
-        public bool validar_contenido_datos(string archivo)
+        private bool validar_contenido_datos(string archivo)
         {
             bool valido = false;
 
@@ -36,6 +48,7 @@ namespace SOFIS_Visor
                 string departamento = nodo_datos.SelectSingleNode("departamento").InnerText;
                 string tipo = nodo_datos.SelectSingleNode("tipo").InnerText;
                 total_de_hojas = Convert.ToInt32(nodo_datos.SelectSingleNode("totalDeHojas").InnerText);
+
 
                 if (!string.IsNullOrEmpty(fecha_hora) && !string.IsNullOrEmpty(identificador) && !string.IsNullOrEmpty(nombre)
                     && !string.IsNullOrEmpty(departamento) && !string.IsNullOrEmpty(tipo) && total_de_hojas != 0)
@@ -60,6 +73,63 @@ namespace SOFIS_Visor
 
 
             return valido;
+        }
+
+        private bool validar_pagina(string archivo)
+        {
+            bool valido = false;
+
+            XmlDocument documento = new XmlDocument();
+
+            try
+            {
+                documento.Load(@"C:\SOFIS\intake\" + archivo);
+                XmlNodeList lista_paginas = documento.SelectNodes("trabajoImpresion/contenido");
+                XmlNodeList lista = ((XmlElement)lista_paginas[0]).GetElementsByTagName("pagina");
+                int i = 1;
+                foreach (XmlElement nodo in lista)
+                {
+                    //almacenamos el dato que esta en: <pagina numero="x" ... y lo convertimos a entero.
+                    string dato_numero = nodo.GetAttribute("numero");
+                    int numero = Convert.ToInt32(dato_numero);
+                    /**
+                     * validamos que el numero de pagina sea en secuencia
+                     * para eso usamos la variable 'i' en caso sea i=3 y numero=5
+                     * el ciclo se detiene.
+                     * */
+                    if (i == numero)
+                    {
+                        /**
+                         * en mitad almacenamos el valor de la pagina actual dividido 2
+                         * ya que el numero de paginas es el doble de hojas,
+                         * cuando NO es igual la mitad al total de hojas sigue con el ciclo
+                         * cuando SI es igual es porque llego al final de las paginas y coinciden,
+                         * ahi finaliza el ciclo.
+                         * */
+                        int mitad = numero / 2;
+                        if (mitad == total_de_hojas)
+                        {
+                            valido = true;
+                        }
+                        else
+                        {
+                            i++;
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+            }
+            catch (XmlException)
+            {
+                return valido;
+            }
+
+            return valido;
+
         }
 
         private bool validar_departamento(string dato)
@@ -138,17 +208,57 @@ namespace SOFIS_Visor
             return valido;
         }
 
-        private bool es_numero(string numero)
+        public bool rendering_trabajos(string archivo)
         {
+            bool valido = false;
+            XmlDocument documento = new XmlDocument();
             try
             {
-                Convert.ToInt32(numero);
-                return true;
+                documento.Load(@"C:\SOFIS\intake\" + archivo);
+
             }
             catch (Exception)
             {
-                return false;
+                return valido;
             }
+
+            return valido;
+        }
+
+        private void composicion_archivo(string archivo)
+        {
+            //bool valido = false;
+            XmlDocument doc = new XmlDocument();
+            try
+            {
+                doc.Load(@"C:\SOFIS\intake\" + archivo);
+
+                XmlNodeList pagina = doc.SelectNodes("//pagina");
+                for (int i = 0; i < pagina.Count; i++)
+                {
+                    XmlNode nodo = pagina[i];
+                    XmlAttribute nuevo = doc.CreateAttribute("numeroSecuencia");
+                    int numero = i + 1;
+                    if (numero > 9)
+                    {//si es mayor a 9 queda numeroSecuencia="0013"
+                        nuevo.InnerText = "00" + numero.ToString();
+                    }
+                    else
+                    {//si es menor queda numeroSecuencia="0004"
+                        nuevo.InnerText = "000" + numero.ToString();
+                    }
+
+                    nodo.Attributes.Append(nuevo);
+                }
+
+                doc.Save(@"C:\SOFIS\intake\" + archivo);
+                //valido = true;
+            }
+            catch (Exception)
+            {
+                //return valido;
+            }
+            //return valido;
         }
 
     }

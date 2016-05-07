@@ -122,6 +122,7 @@
                     <ItemTemplate>
                         <asp:ImageButton runat="server" ID="btnValidar" ImageUrl="~/validar.png" ToolTip="Validar" CommandName="ValidarArchivo" CommandArgument='<%# Eval("cod_archivo") %>' />
                         <asp:ImageButton runat="server" ID="btnDescargar" ImageUrl="~/descargar.png" ToolTip="Descargar" CommandName="Descargar" CommandArgument='<%# Eval("cod_archivo") %>' />
+                        <asp:ImageButton runat="server" ID="btnComposicion" ImageUrl="~/composicion.png" ToolTip="Composicion" CommandName="Composicion" CommandArgument='<%# Eval("cod_archivo") %>' />
                     </ItemTemplate>
                 </asp:TemplateField>
 
