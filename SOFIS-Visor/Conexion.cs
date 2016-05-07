@@ -142,5 +142,23 @@ namespace SOFIS_Visor
                 return retorno;
             }
         }
+
+        public string consultar_dato(string campo, string tabla, string pk, string condicion)
+        {
+            string sql = @"SELECT " + campo + " FROM " + tabla + " WHERE " + pk + "=@codigo";
+            //cadena conexion
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["cadenaConexion"].ToString()))
+            {
+                conn.Open();//abrimos conexion
+
+                SqlCommand cmd = new SqlCommand(sql, conn); //ejecutamos la instruccion
+
+                cmd.Parameters.AddWithValue("@codigo", condicion); //enviamos los parametros
+
+
+                string retorno = Convert.ToString(cmd.ExecuteScalar()); //devuelve el dato
+                return retorno;
+            }
+        }
     }
 }

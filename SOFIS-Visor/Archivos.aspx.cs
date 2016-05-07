@@ -15,17 +15,19 @@ namespace SOFIS_Visor
     public partial class Archivos : System.Web.UI.Page
     {
         ValidarXML vxml = new ValidarXML();
+        Conexion conectar = new Conexion();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             
-            string userid = (string)Session["usuario"];
-            if (!IsPostBack)
-            {
-                if (String.IsNullOrEmpty(userid))
-                {
-                    Response.Redirect("Login.aspx");
-                }
-            }
+           // string userid = (string)Session["usuario"];
+            //if (!IsPostBack)
+            //{
+              //  if (String.IsNullOrEmpty(userid))
+                //{
+                  //  Response.Redirect("Login.aspx");
+                //}
+            //}
             
         }
 
@@ -93,14 +95,77 @@ namespace SOFIS_Visor
             }
             else if (e.CommandName == "Descargar")
             {
-                string dato_codigoarchivo = e.CommandArgument.ToString();
-                int codigoarchivo = Convert.ToInt32(dato_codigoarchivo);
-                Response.ContentType = "Application/xml";
-                Response.AppendHeader("Content-Disposition", "attachment; filename=BANCA.CARTA.2016.02.23.08.00.01.311.xml");
-                Response.TransmitFile(Server.MapPath(@"C:\SOFIS\intake/BANCA.CARTA.2016.02.23.08.00.01.311.xml"));
-                Response.End();
+                string codigoarchivo = e.CommandArgument.ToString();
+                descargar_archivo(codigoarchivo);
             }
-        }
+            else if (e.CommandName == "Composicion")
+            {
+
+            }
+            else if (e.CommandName == "Insercion")
+            {
+
+            }
+            else if (e.CommandName == "Rendering")
+            {
+
+            }
+        }//fin validar botones
+
+        private void descargar_archivo(string codigoarchivo)
+        {
+            //seleccinamos los datos que conforman el nombre del archivo
+            string sql = "SELECT departamento, tipo_trabajo, fecha_generado, hora_generado, secuencia FROM archivo WHERE cod_archivo = "+ codigoarchivo;
+
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["cadenaConexion"].ToString()))
+            {
+                conn.Open();//abrimos conexion
+                SqlDataReader fila = null;
+
+                try
+                {
+                    SqlCommand cmd = new SqlCommand(sql, conn); //ejecutamos la instruccion
+                    fila = cmd.ExecuteReader(); //nos devuelve la fila completa de datos
+                    string depa = "", tipo = "", fecha = "", hora = "", secuencia = "";
+                    
+                    //llenamos los datos que estan almacenados en el Reader
+                    while (fila.Read())
+                    {
+                        depa = fila["departamento"].ToString();
+                        tipo = fila["tipo_trabajo"].ToString();
+                        fecha = fila["fecha_generado"].ToString(); //23/09/2016
+                        hora = fila["hora_generado"].ToString(); //08:00:03 h:m:s
+                        secuencia = fila["secuencia"].ToString();
+                    }
+                    //teniendo los valores ya solo ordenamos la fecha de la siguiente forma a.m.d
+                    string[] fechagen = fecha.Split('/'); //[d][m][a]
+                    string[] horagen = hora.Split(':'); //[h][m][s]
+
+                    //ordenamos los datos para formar el nombre
+                    string nombre = depa + "." + tipo + "." + fechagen[2] + "." + fechagen[1] + "." 
+                        + fechagen[0] + "." + horagen[0] + "." + horagen[1] + "." + horagen[2] + "." + secuencia + ".xml";
+                    //cerramos la conexion con la BD
+                    fila.Close();
+                    conn.Close();
+                    //procedemos a ejecutar la descarga
+                    try
+                    {
+                        Response.ContentType = "Application/xml";
+                        Response.AppendHeader("Content-Disposition", "attachment; filename="+nombre);
+                        Response.TransmitFile(Server.MapPath(@"C:\SOFIS\intake\PendingToTransmit/" + nombre));
+                        Response.End();
+                    }
+                    catch (Exception)
+                    {
+                        lblmensaje.Text = "Error: imposible descargar, verifique la ubicacion del archivo, en C:\\SOFIS\\intake\\PendingToTransmit\\";
+                    }
+                }
+                catch (Exception)
+                {
+                    lblmensaje.Text = "Error. Archivo no encontrado.";
+                }
+            }
+        }//fin descargar_archivo
 
     }
 }

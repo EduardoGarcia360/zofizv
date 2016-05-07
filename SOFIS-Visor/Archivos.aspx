@@ -112,6 +112,12 @@
                     </ItemTemplate>
                 </asp:TemplateField>
 
+                <asp:TemplateField HeaderText="Num. Secuencia">
+                    <ItemTemplate>
+                        <asp:Label runat="server" ID="lblsecuencia" Text='<%# Eval("secuencia") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
                 <asp:TemplateField HeaderText="Estado de Archivo">
                     <ItemTemplate>
                         <asp:Label runat="server" ID="lblestado" Text='<%# Eval("estado") %>'></asp:Label>
@@ -123,6 +129,8 @@
                         <asp:ImageButton runat="server" ID="btnValidar" ImageUrl="~/validar.png" ToolTip="Validar" CommandName="ValidarArchivo" CommandArgument='<%# Eval("cod_archivo") %>' />
                         <asp:ImageButton runat="server" ID="btnDescargar" ImageUrl="~/descargar.png" ToolTip="Descargar" CommandName="Descargar" CommandArgument='<%# Eval("cod_archivo") %>' />
                         <asp:ImageButton runat="server" ID="btnComposicion" ImageUrl="~/composicion.png" ToolTip="Composicion" CommandName="Composicion" CommandArgument='<%# Eval("cod_archivo") %>' />
+                        <asp:ImageButton runat="server" ID="btnInsercion" ImageUrl="~/insercion.png" ToolTip="Insercion a Trab. de Impre." CommandName="Insercion" CommandArgument='<%# Eval("cod_archivo") %>' />
+                        <asp:ImageButton runat="server" ID="btnRendering" ImageUrl="~/rendering.png" ToolTip="Rendering de Trab. de Impre." CommandName="Rendering" CommandArgument='<%# Eval("cod_archivo") %>' />
                     </ItemTemplate>
                 </asp:TemplateField>
 
