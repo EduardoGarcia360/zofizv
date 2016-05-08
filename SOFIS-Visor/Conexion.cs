@@ -137,26 +137,25 @@ namespace SOFIS_Visor
 
                 cmd.Parameters.AddWithValue("@codigo", codigousuario); //enviamos los parametros
 
-
                 string retorno = Convert.ToString(cmd.ExecuteScalar()); //devuelve la fila afectada
+                conn.Close();
                 return retorno;
             }
         }
 
-        public string consultar_dato(string campo, string tabla, string pk, string condicion)
+        public string consultar_un_dato(string campo, string tabla, string codigoBD, string codigo)
         {
-            string sql = @"SELECT " + campo + " FROM " + tabla + " WHERE " + pk + "=@codigo";
-            //cadena conexion
+            string sql = @"SELECT " + campo + " FROM " + tabla + " WHERE " + codigoBD + " = @codigo";
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["cadenaConexion"].ToString()))
             {
                 conn.Open();//abrimos conexion
 
                 SqlCommand cmd = new SqlCommand(sql, conn); //ejecutamos la instruccion
 
-                cmd.Parameters.AddWithValue("@codigo", condicion); //enviamos los parametros
+                cmd.Parameters.AddWithValue("@codigo", codigo); //enviamos los parametros
 
-
-                string retorno = Convert.ToString(cmd.ExecuteScalar()); //devuelve el dato
+                string retorno = Convert.ToString(cmd.ExecuteScalar()); //devuelve la fila afectada
+                conn.Close();
                 return retorno;
             }
         }

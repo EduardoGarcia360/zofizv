@@ -91,7 +91,10 @@ namespace SOFIS_Visor
             if (e.CommandName == "ValidarArchivo")
             {
                 string codigoarchivo = e.CommandArgument.ToString();
-                if (vxml.validar_contenido(codigoarchivo))
+                string departamento = conectar.consultar_un_dato("departamento", "archivo", "cod_archivo", codigoarchivo);
+                string tipo = conectar.consultar_un_dato("tipo_trabajo", "archivo", "cod_archivo", codigoarchivo);
+                
+                if (vxml.validar_contenido(codigoarchivo,departamento,tipo))
                 {
                     lblmensaje.Text = "Archivo validado";
                 }
@@ -111,7 +114,17 @@ namespace SOFIS_Visor
             }
             else if (e.CommandName == "Insercion")
             {
+                string codigo = e.CommandArgument.ToString();
+                string valido = conectar.consultar_un_dato("estado", "archivo", "cod_archivo", codigo);
 
+                if (valido.Equals("Valido"))
+                {
+                    insercion_trabajos(codigo);
+                }
+                else
+                {
+                    lblmensaje.Text = "Antes de hacer la Insercion a trab. de impresion, debes validar el archivo.";
+                }
             }
             else if (e.CommandName == "Rendering")
             {
@@ -119,10 +132,26 @@ namespace SOFIS_Visor
             }
         }//fin validar botones
 
-        private void descargar_archivo(string codigoarchivo)
+        private void insercion_trabajos(string codigoarchivo)
+        {
+            string nombre = nombre_archivo(codigoarchivo);
+            string tipo = conectar.consultar_un_dato("tipo_trabajo","archivo","cod_archivo",codigoarchivo);
+            if (vxml.insercion_archivo(nombre, tipo))
+            {
+                lblmensaje.Text = "Insercion a trabajos de impresion realizada.";
+            }
+            else
+            {
+                lblmensaje.Text = "Error durante la validacion";
+            }
+
+        }
+
+        //devuelve el nombre del archivo
+        private string nombre_archivo(string codigoarchivo)
         {
             //seleccinamos los datos que conforman el nombre del archivo
-            string sql = "SELECT departamento, tipo_trabajo, fecha_generado, hora_generado, secuencia FROM archivo WHERE cod_archivo = "+ codigoarchivo;
+            string sql = "SELECT departamento, tipo_trabajo, fecha_generado, hora_generado, secuencia FROM archivo WHERE cod_archivo = " + codigoarchivo;
 
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["cadenaConexion"].ToString()))
             {
@@ -134,7 +163,7 @@ namespace SOFIS_Visor
                     SqlCommand cmd = new SqlCommand(sql, conn); //ejecutamos la instruccion
                     fila = cmd.ExecuteReader(); //nos devuelve la fila completa de datos
                     string depa = "", tipo = "", fecha = "", hora = "", secuencia = "";
-                    
+
                     //llenamos los datos que estan almacenados en el Reader
                     while (fila.Read())
                     {
@@ -149,40 +178,47 @@ namespace SOFIS_Visor
                     string[] horagen = hora.Split(':'); //[h][m][s]
 
                     //ordenamos los datos para formar el nombre
-                    string nombre = depa + "." + tipo + "." + fechagen[2] + "." + fechagen[1] + "." 
+                    string nombre = depa + "." + tipo + "." + fechagen[2] + "." + fechagen[1] + "."
                         + fechagen[0] + "." + horagen[0] + "." + horagen[1] + "." + horagen[2] + "." + secuencia + ".xml";
                     //cerramos la conexion con la BD
                     fila.Close();
                     conn.Close();
-                    //procedemos a ejecutar la descarga
-                    try
-                    {
-                        Response.ContentType = "Application/xml";
-                        Response.AppendHeader("Content-Disposition", "attachment; filename="+nombre);
-                        Response.TransmitFile(Server.MapPath(@"C:\SOFIS\intake\PendingToTransmit/" + nombre));
-                        Response.End();
-                    }
-                    catch (Exception)
-                    {
-                        lblmensaje.Text = "Error: imposible descargar, verifique la ubicacion del archivo, en C:\\SOFIS\\intake\\PendingToTransmit\\";
-                    }
+                    return nombre;
                 }
                 catch (Exception)
                 {
-                    lblmensaje.Text = "Error. Archivo no encontrado.";
+                    return "0";
                 }
+            }
+        }
+
+        private void descargar_archivo(string codigoarchivo)
+        {
+            string nombre = nombre_archivo(codigoarchivo);
+
+            //procedemos a ejecutar la descarga
+            try
+            {
+                Response.ContentType = "Application/xml";
+                Response.AppendHeader("Content-Disposition", "attachment; filename=" + nombre);
+                Response.TransmitFile(Server.MapPath(@"C:\SOFIS\intake\PendingToTransmit/" + nombre));
+                Response.End();
+            }
+            catch (Exception)
+            {
+                lblmensaje.Text = "Error: imposible descargar, verifique la ubicacion del archivo, en C:\\SOFIS\\intake\\PendingToTransmit\\";
             }
         }
 
         protected void btntemporal_Click(object sender, EventArgs e)
         {
-            if (vxml.insercion_archivo("COMUNICACION.PUBLICIDAD.2016.09.23.08.00.01.751.xml"))
+            if (vxml.insercion_archivo("COMUNICACION.PUBLICIDAD.2016.09.23.08.00.01.751.xml",null))
             {
-                lblmensaje.Text = "listo papu";
+                lblmensaje.Text = "papu";
             }
             else
             {
-                lblmensaje.Text = "baneo lince";
+                lblmensaje.Text = "baneo";
             }
         }//fin descargar_archivo
 

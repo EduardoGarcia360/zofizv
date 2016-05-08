@@ -10,10 +10,10 @@ namespace SOFIS_Visor
     {
         int total_de_hojas = 0;
 
-        public bool validar_contenido(string archivo)
+        public bool validar_contenido(string archivo, string departamento, string tipo)
         {
             bool valido = false;
-            if (validar_contenido_datos(archivo))
+            if (validar_contenido_datos(archivo, departamento, tipo))
             {
                 if (validar_pagina(archivo))
                 {
@@ -25,7 +25,7 @@ namespace SOFIS_Visor
         }
 
         //metodo para validar el contenido de el apartado "datos" dentro del XML
-        private bool validar_contenido_datos(string archivo)
+        private bool validar_contenido_datos(string archivo, string A_depa, string A_tipo)
         {
             bool valido = false;
 
@@ -50,20 +50,23 @@ namespace SOFIS_Visor
                 total_de_hojas = Convert.ToInt32(nodo_datos.SelectSingleNode("totalDeHojas").InnerText);
 
 
-                if (!string.IsNullOrEmpty(fecha_hora) && !string.IsNullOrEmpty(identificador) && !string.IsNullOrEmpty(nombre)
-                    && !string.IsNullOrEmpty(departamento) && !string.IsNullOrEmpty(tipo) && total_de_hojas != 0)
+                if (departamento.Equals(A_depa) && tipo.Equals(A_tipo))
                 {
-                    if (validar_fecha_creacion(fecha_hora))
+                    if (!string.IsNullOrEmpty(fecha_hora) && !string.IsNullOrEmpty(identificador) && !string.IsNullOrEmpty(nombre)
+                    && total_de_hojas != 0)
                     {
-                        if (validar_departamento(departamento))
+                        if (validar_fecha_creacion(fecha_hora))
                         {
-                            if (validar_tipo(tipo))
+                            if (validar_departamento(departamento))
                             {
-                                valido = true;
+                                if (validar_tipo(tipo))
+                                {
+                                    valido = true;
+                                }
                             }
                         }
-                    }
 
+                    }
                 }
             }
             catch (XmlException)
@@ -267,19 +270,29 @@ namespace SOFIS_Visor
             try
             {
                 doc.Load(@"C:\SOFIS\intake\" + archivo);
+                
                 XmlNode nodo = doc.CreateNode(XmlNodeType.Element, "insertar", "");
                 XmlAttribute secuencia = doc.CreateAttribute("numeroSecuencia");
                 XmlAttribute numeropag = doc.CreateAttribute("numeroPagina");
                 XmlAttribute documento = doc.CreateAttribute("documento");
                 secuencia.Value = "0001";
-                numeropag.Value = "2";
-                documento.Value = "trifoliar";
+                numeropag.Value = "1";
+                if (tipo.Equals("REPORTE"))
+                {
+                    documento.Value = "trifoliar";
+                }
+                else if (tipo.Equals("ESTADODECUENTA") || tipo.Equals("PUBLICIDAD"))
+                {
+                    documento.Value = "cupones";
+                }
+                
                 nodo.Attributes.Append(secuencia);
                 nodo.Attributes.Append(numeropag);
                 nodo.Attributes.Append(documento);
-                doc.GetElementsByTagName("pagina")[0].InsertAfter(nodo, doc.GetElementsByTagName("pagina")[0].LastChild);
+                doc.GetElementsByTagName("pagina")[0].InsertAfter(nodo, doc.GetElementsByTagName("pagina")[1].LastChild);
 
                 doc.Save(@"C:\SOFIS\intake\" + archivo);
+                
                 valido = true;
             }
             catch (Exception)
