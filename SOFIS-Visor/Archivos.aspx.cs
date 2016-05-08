@@ -110,7 +110,18 @@ namespace SOFIS_Visor
             }
             else if (e.CommandName == "Composicion")
             {
+                string codigo = e.CommandArgument.ToString();
+                string valido = conectar.consultar_un_dato("estado", "archivo", "cod_archivo", codigo);
 
+                if (valido.Equals("Valido"))
+                {
+                    string nombre = nombre_archivo(codigo);
+                    vxml.composicion_archivo(nombre);
+                }
+                else
+                {
+                    lblmensaje.Text = "Antes de realizar la composicion, debes validar el archivo.";
+                }
             }
             else if (e.CommandName == "Insercion")
             {
@@ -208,7 +219,9 @@ namespace SOFIS_Visor
             {
                 lblmensaje.Text = "Error: imposible descargar, verifique la ubicacion del archivo, en C:\\SOFIS\\intake\\PendingToTransmit\\";
             }
-        }
+        }//fin descargar
+
+
 
         protected void btntemporal_Click(object sender, EventArgs e)
         {

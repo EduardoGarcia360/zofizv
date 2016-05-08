@@ -228,7 +228,7 @@ namespace SOFIS_Visor
             return valido;
         }
 
-        private void composicion_archivo(string archivo)
+        public void composicion_archivo(string archivo)
         {
             //bool valido = false;
             XmlDocument doc = new XmlDocument();
