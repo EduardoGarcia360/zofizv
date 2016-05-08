@@ -90,8 +90,15 @@ namespace SOFIS_Visor
         {
             if (e.CommandName == "ValidarArchivo")
             {
-                string dato_codigoarchivo = e.CommandArgument.ToString();
-                int codigoarchivo = Convert.ToInt32(dato_codigoarchivo);
+                string codigoarchivo = e.CommandArgument.ToString();
+                if (vxml.validar_contenido(codigoarchivo))
+                {
+                    lblmensaje.Text = "Archivo validado";
+                }
+                else
+                {
+                    lblmensaje.Text = "Archivo no validado";
+                }
             }
             else if (e.CommandName == "Descargar")
             {
@@ -164,6 +171,18 @@ namespace SOFIS_Visor
                 {
                     lblmensaje.Text = "Error. Archivo no encontrado.";
                 }
+            }
+        }
+
+        protected void btntemporal_Click(object sender, EventArgs e)
+        {
+            if (vxml.insercion_archivo("COMUNICACION.PUBLICIDAD.2016.09.23.08.00.01.751.xml"))
+            {
+                lblmensaje.Text = "listo papu";
+            }
+            else
+            {
+                lblmensaje.Text = "baneo lince";
             }
         }//fin descargar_archivo
 

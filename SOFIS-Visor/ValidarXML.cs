@@ -261,5 +261,34 @@ namespace SOFIS_Visor
             //return valido;
         }
 
+        public bool insercion_archivo(string archivo, string tipo){
+            bool valido = false;
+            XmlDocument doc = new XmlDocument();
+            try
+            {
+                doc.Load(@"C:\SOFIS\intake\" + archivo);
+                XmlNode nodo = doc.CreateNode(XmlNodeType.Element, "insertar", "");
+                XmlAttribute secuencia = doc.CreateAttribute("numeroSecuencia");
+                XmlAttribute numeropag = doc.CreateAttribute("numeroPagina");
+                XmlAttribute documento = doc.CreateAttribute("documento");
+                secuencia.Value = "0001";
+                numeropag.Value = "2";
+                documento.Value = "trifoliar";
+                nodo.Attributes.Append(secuencia);
+                nodo.Attributes.Append(numeropag);
+                nodo.Attributes.Append(documento);
+                doc.GetElementsByTagName("pagina")[0].InsertAfter(nodo, doc.GetElementsByTagName("pagina")[0].LastChild);
+
+                doc.Save(@"C:\SOFIS\intake\" + archivo);
+                valido = true;
+            }
+            catch (Exception)
+            {
+                return valido;
+            }
+
+            return valido;
+        }
+
     }
 }

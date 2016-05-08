@@ -57,6 +57,7 @@
                     <asp:ImageButton runat="server" ID="btnBuscar" ImageUrl="~/buscar.png" ToolTip="Buscar" OnClick="btnBuscar_Click" />
                 </td>
                 <td>
+                    <asp:Button runat="server" ID="btntemporal" Text="btn" OnClick="btntemporal_Click" />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</td>
                 <td>
                     <asp:ImageButton runat="server" ID="btnMostrar_Todos" ImageUrl="~/todos.png" ToolTip="Mostrar Todos" OnClick="btnMostrar_Todos_Click" />
